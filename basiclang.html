@@ -1,0 +1,297 @@
+<html>
+<body>
+
+line
+
+</body>
+<script>
+
+
+
+const memory = {
+
+  error : {errorType : null, errorMessage: null}
+  variableMemory : new Map(),
+  lineMemory : new Map()
+
+}
+
+
+
+
+class BasicParser{
+
+
+  line = "10 20*10";
+  lines = ["10 20*10", "20 "]
+
+
+  executionLineStack = new Map();
+
+  constructor(){
+    this.start();
+  }
+
+  start(){
+    this.parseLine(this.line);
+
+  }
+
+  readLines(lines){
+
+    let linesMap = new Map();
+    for(let i = 0; i<lines.length; i++){
+
+    }
+  }
+
+  parseLine(line){
+    let splittedLine = this.splitLine(line);
+    let curLineCounter = this.parseLineNumber(splittedLine);
+    this.executionLineStack.set(curLineCounter.toString(),this.parseLineToOperationObject(splittedLine));
+    let executionLine =  this.createExectionLine(this.parseLineToOperationObject(splittedLine))
+    console.log("executeLine: ",executionLine)
+    this.executeLine(executionLine);
+  }
+
+  splitLine(line){
+    return line.split("");
+  }
+
+  parseLineNumber(splittedLines){
+    let lineNumber = "";
+    let lineNumberCounter = 0;
+
+    for(let i = 0; i< splittedLines.length; i++){
+        if(splittedLines[i]!=" "){
+          lineNumber+=splittedLines[i];
+          lineNumberCounter++;
+        }
+        else{
+          break;
+        }
+    }
+
+    lineNumber = Number.parseInt(lineNumber)
+    splittedLines.splice(0,lineNumberCounter)
+
+    return lineNumber;
+  }
+
+  /**
+  * checks if line number is a positive integer
+  */
+  lineNumberValidation(lineNumber){
+    let number =  Number.parseInt(lineNumber);
+    if(Number.isNaN(number)){
+
+    }
+  }
+
+  parseLineToOperationObject(splittedLine){
+      var operation = null;
+      var lineObjects = []
+
+      let currentStackValue = "";
+      let stackValues = [];
+
+      let curStackValueIndex = 0;
+      for(let i = 0; i<splittedLine.length; i++){
+            if(splittedLine[i]!= " "){
+
+                if(this.parseOperator(splittedLine[i])==true){
+                        if(currentStackValue != null){
+                            stackValues.push(currentStackValue)
+                        }
+
+                        currentStackValue = "";
+                        stackValues.push(splittedLine[i])
+
+                }
+                else{
+                    currentStackValue+= splittedLine[i];
+                }
+            }
+            else{
+                currentStackValue = ""
+            }
+
+      }
+      stackValues.push(currentStackValue)
+      console.log(stackValues)
+
+      return stackValues;
+  }
+
+  sortExecutionLine(executeLine){
+        let sortedExectutionTree = [];
+
+        return null;
+  }
+
+
+  /**
+  * create a array of execution information
+  */
+  createExectionLine(executionLine){
+    let operationTree = [];
+    let executionTree = [];
+
+    let variableStore = [];
+
+
+    //create operation
+    for(let i = 0; i<executionLine.length;i++){
+      let obj
+        switch(executionLine[i] ){
+            case "+":
+
+              var val1 =variableStore[i-1]==null? new VariableObject(null,"exectuionVar_"+(i-1),executionLine[i-1]) : variableStore[i-1]
+              var val2 = variableStore[i+1]==null? new VariableObject(null,"exectuionVar_"+(i+1),executionLine[i+1]) : variableStore[i+1]
+              obj = new AdditionOperationObject([val1,val2])
+              executionTree[i] = obj
+            break;
+            case "-":
+
+            break;
+            case "*":
+              var val1 =executionTree[i-1]==null? new VariableObject(null,"exectuionVar_"+(i-1),executionLine[i-1]) : executionTree[i-1]
+              var val2 = executionTree[i+1]==null? new VariableObject(null,"exectuionVar_"+(i+1),executionLine[i+1]) : executionTree[i+1]
+              obj =new MultiplicationOperationObject([val1,val2])
+              executionTree[i] = obj
+            break;
+            default:
+                if(variableStore[i] == null){
+                  obj = new VariableObject(null,"exectuionVar_"+i,executionLine[i])
+                variableStore[i] = obj
+            }
+            break;
+        }
+
+
+    }
+
+    return executionTree
+
+  }
+
+
+  executeLine(executionLine) {
+
+    let allExecutionDone = false;
+
+    let orderExDone = false;
+
+    for(let i = 0; i < executionLine.length; i++){
+
+      if(executionLine[i] != null){
+
+         executionLine[i].runOperation()
+
+      } else{
+
+      }
+    }
+
+  }
+
+
+
+  parseOperator(op,values){
+
+      let operation = false;
+      switch(op){
+        case "+":
+          operation =true;
+        break;
+        case "-":
+          operation = true;
+        break;
+        case "*":
+          operation = true;
+        break;
+        case "print":
+
+        break;
+
+        default :
+          operation = false;
+        break;
+      }
+
+      return operation;
+  }
+
+  plusOperator(){
+
+
+  }
+
+}
+
+
+class OperationObject{
+  values = []
+  operationResult = null;
+  operationDone  =false;
+  constructor(values){
+    this.values = values;
+  }
+  runOperation(){
+
+  }
+}
+
+class VariableObject{
+  type = null;
+  name = null;
+  value = null;
+
+  constructor(type,name,value){
+    this.type= type;
+    this.name = name;
+    this.value = value
+  }
+
+}
+
+class AdditionOperationObject extends OperationObject{
+
+    constructor(values){
+      super(values);
+    }
+    runOperation(){
+        for(let i = 0; i < this.values.length; i++){
+          this.operationResult += Number.parseInt(this.values[i].value);
+        }
+        this.operationDone = true;
+        console.log(this.operationResult)
+    }
+
+}
+
+class MultiplicationOperationObject extends OperationObject{
+
+    constructor(values){
+      super(values);
+    }
+    runOperation(){
+
+        if(this.values[0] != null && this.values[1] != null){
+            this.operationResult  = Number.parseInt(this.values[0].value)*Number.parseInt(this.values[1].value);
+        }
+
+        this.operationDone = true;
+        console.log(this.operationResult)
+    }
+
+}
+
+
+
+
+
+
+const basicParser = new BasicParser();
+</script>
+</html>
