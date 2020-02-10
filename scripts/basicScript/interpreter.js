@@ -6,10 +6,15 @@ const interpreter = {
 
     interpretLines : function(tokenLines){
         console.log("Tokens and lines",tokenLines)
+        tokenLines.forEach((val,key)=>{
 
-        for(let i = 0; i<tokenLines.length;i++){
-          this.executeLine( this.interpretLine(tokenLines[i]))
-        }
+            this.executeLine( key, this.interpretLine(val))
+
+        });
+       /* for(let i = 0; i<tokenLines.length;i++){
+            console.log("line: ",i)
+
+        }*/
     },
 
     interpretLine : function(tokenLine){
@@ -66,14 +71,15 @@ const interpreter = {
 
     },
 
-    executeLine:function (executionLine) {
+    executeLine:function (lineNum,executionLine) {
 
+        memory.currentLine = lineNum;
+        console.log("linenum",  memory.currentLine )
         let allExecutionDone = false;
 
         let orderExDone = false;
 
         for(let i = 0; i < executionLine.length; i++){
-
             if(executionLine[i] != null){
 
                 executionLine[i].runOperation()

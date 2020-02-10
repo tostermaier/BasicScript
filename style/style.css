@@ -3,17 +3,20 @@ body{
 }
 
 #commandBar{
-
-}
-.runCode{
-   color: white;
-    font-size:30px !important;
-    border:none;
-    background: none;
-    float:right;
+    margin-right:1em;
     position: absolute;
     right:0px;
-    margin-right:1em;
+    color: white;
+    font-size:15px !important;
+    display: flex;
+    align-items: center;
+}
+
+.runCode{
+    color: white;
+    border:none;
+    background: none;
+    font-size:30px !important;
 }
 .runCode:hover{
     color: #E5C064;

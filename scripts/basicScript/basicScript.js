@@ -6,7 +6,7 @@ const basicScript = {
         let lines = parser.parseLines(this.file)
         let tokenizeLines = tokenizer.createTokensForLines(lines)
         this.test = tokenizeLines;
-        interpreter.interpretLines(Array.from(tokenizeLines.values()))
+        interpreter.interpretLines(tokenizeLines)
     }
 
 };

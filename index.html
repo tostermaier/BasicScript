@@ -9,17 +9,20 @@
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
     <script src="scripts/basicScript/basicConsole.js"></script>
+
     <script src="scripts/basicScript/memory.js"></script>
+    <script src="scripts/basicScript/errorHandler.js"></script>
     <script src="scripts/basicScript/objects.js"></script>
     <script src="scripts/basicScript/parser.js"></script>
     <script src="scripts/basicScript/interpreter.js"></script>
     <script src="scripts/basicScript/tokenizer.js"></script>
     <script src="scripts/basicScript/basicScript.js"></script>
+
     <script src="scripts/codeEditor/basicEditor.js"></script>
 </head>
 <body>
 <section>
-<div id="commandBar"><button class="material-icons runCode"  onclick="basicEditor.runCode()" >play_circle_outline</button></div>
+    <div id="commandBar"><div>BasicScript </div><button class="material-icons runCode"  onclick="basicEditor.runCode()" >play_circle_outline</button></div>
 </section>
 <section>
 <textarea class="editor" id="basicEditor" rows="15">

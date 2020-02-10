@@ -1,8 +1,7 @@
 const basicConsole = {
 
 
-    writeToConsole : function (val) {
+    writeToConsole : function (val,fontColor) {
         basicEditor.writeToConsole(val)
-
     }
 };

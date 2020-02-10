@@ -32,6 +32,21 @@ class VariableObject{
 
 }
 
+class int{
+    name = null;
+    value = 0;
+
+    setValue(val){
+        this.val = Number.isInteger(val) ? val : ()=>{
+
+            return 0;
+        }
+
+
+    }
+}
+
+
 class AdditionOperationObject extends OperationObject{
 
     constructor(values){
@@ -83,18 +98,26 @@ class PrintOperationObject extends OperationObject{
         let re = /\".*?\"/g;
         let splitted = value.match(re)
         let outLine = value.split(re)
+        console.log("outline",splitted)
+        if(splitted.length == 1){
 
-        for(var e of outLine){
-            if(e != "" && e != " "){
-                console.error("error",e)
-                memory.error = {
-                    errorMessage: "error while parsing print statement",
-                    errorType: "printError"
-                };
-                this.canRun = false;
+            for(var e of outLine){
+                console.log(e)
+                if(e != "" && e != " "){
+                    console.error("error",e, memory.currentLine)
+                    errorHandler.throwError({type: "print error",message:"error in parsing print input. line: "+ memory.currentLine})
+                    this.canRun = false;
+                }
             }
+            this.values = splitted
         }
-        this.values = splitted
+        else{
+
+                console.error("error",e, memory.currentLine)
+                errorHandler.throwError({type: "print error",message:"error in parsing print input. line: "+ memory.currentLine})
+                this.canRun = false;
+
+        }
     }
 
 
