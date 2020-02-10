@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Basic Script</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css" media="screen" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <script src="scripts/basicScript/basicConsole.js"></script>
+    <script src="scripts/basicScript/memory.js"></script>
+    <script src="scripts/basicScript/objects.js"></script>
+    <script src="scripts/basicScript/parser.js"></script>
+    <script src="scripts/basicScript/interpreter.js"></script>
+    <script src="scripts/basicScript/tokenizer.js"></script>
+    <script src="scripts/basicScript/basicScript.js"></script>
+    <script src="scripts/codeEditor/basicEditor.js"></script>
+</head>
+<body>
+<section>
+<div id="commandBar"><button class="material-icons runCode"  onclick="basicEditor.runCode()" >play_circle_outline</button></div>
+</section>
+<section>
+<textarea class="editor" id="basicEditor" rows="15">
+</textarea>
+</section>
+<section  id="basicConsole" class="basicConsole">
+
+</section>
+</body>
+<script>
+
+    basicScript.run();
+
+</script>
+</html>

@@ -1,0 +1,31 @@
+body{
+    background: #282C34; font-family: 'IBM Plex Mono', monospace !important;
+}
+
+#commandBar{
+
+}
+.runCode{
+   color: white;
+    font-size:30px !important;
+    border:none;
+    background: none;
+    float:right;
+    position: absolute;
+    right:0px;
+    margin-right:1em;
+}
+.runCode:hover{
+    color: #E5C064;
+
+}
+.editor{
+    width:100%; font-size: 30px;background: inherit;border: none; color:#E5C064;font-family: inherit;  resize: none;
+}
+.basicConsole{
+    width: 100%;
+    height:5em;
+    color: #fcfff7;
+    font-size:20px !important;
+
+}
