@@ -7,14 +7,11 @@ const interpreter = {
     interpretLines : function(tokenLines){
         console.log("Tokens and lines",tokenLines)
         tokenLines.forEach((val,key)=>{
-
-            this.executeLine( key, this.interpretLine(val))
+            memory.currentLine = key
+            this.executeLine(key , this.interpretLine(val))
 
         });
-       /* for(let i = 0; i<tokenLines.length;i++){
-            console.log("line: ",i)
 
-        }*/
     },
 
     interpretLine : function(tokenLine){
@@ -51,11 +48,18 @@ const interpreter = {
                 case "print":
 
                     obj =new PrintOperationObject()
-                    obj.createStatment(executionLine.slice(i+1,executionLine.length-1))
-                    executionTree[i] = obj
+
+                    obj.createStatment(executionLine.slice(i+1,executionLine.length))
+                    executionTree[i] = obj;
 
                     break;
 
+                case "int":
+
+                        obj = new IntObject();
+                        obj.createStatement(executionLine.slice(i+1,executionLine.length));
+                        executionTree[i] = obj;
+                    break;
                 default:
                     if(variableStore[i] == null){
                         obj = new VariableObject(null,"exectuionVar_"+i,executionLine[i])
@@ -73,8 +77,8 @@ const interpreter = {
 
     executeLine:function (lineNum,executionLine) {
 
-        memory.currentLine = lineNum;
-        console.log("linenum",  memory.currentLine )
+        //memory.currentLine = lineNum;
+        console.log("linenum",  memory.currentLine,executionLine )
         let allExecutionDone = false;
 
         let orderExDone = false;
@@ -91,8 +95,5 @@ const interpreter = {
 
     },
 
-    getInlineStatements: function (statements) {
-        let inGroup = false
 
-    }
 };

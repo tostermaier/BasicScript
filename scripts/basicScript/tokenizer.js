@@ -41,7 +41,7 @@ const tokenizer = {
                     stackValues.push(" ")
                     currentStackValue = '';
                 }
-                console.log(currentStackValue)
+
             }
         }
         stackValues.push(currentStackValue)

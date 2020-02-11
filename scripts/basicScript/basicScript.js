@@ -3,10 +3,10 @@ const basicScript = {
     , '25 print "123+13"'],
     test : null,
     run: function(){
+        memory.clearMemory()
         let lines = parser.parseLines(this.file)
         let tokenizeLines = tokenizer.createTokensForLines(lines)
-        this.test = tokenizeLines;
         interpreter.interpretLines(tokenizeLines)
+        basicConsole.writeToMemoryConsole(memory.variableMemory)
     }
-
 };

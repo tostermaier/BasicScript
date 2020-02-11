@@ -26,9 +26,18 @@ body{
     width:100%; font-size: 30px;background: inherit;border: none; color:#E5C064;font-family: inherit;  resize: none;
 }
 .basicConsole{
-    width: 100%;
+    width: 60%;
     height:5em;
     color: #fcfff7;
-    font-size:20px !important;
+    font-size:15px !important;
 
 }
+.basicMemory{
+    width: 30%;
+    margin-left:5%;
+    height:5em;
+    color: #C678DD;
+    font-size:15px !important;
+
+}
+
